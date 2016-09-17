@@ -34,11 +34,13 @@ public class JDBC_Connection {
             con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/e_enterprise?user=schi&password=123456");
             System.out.println("Attempt Successfull!! Connection Established!!!!");
           
+          
             
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Connection Cannot be Established !!!");
+            
             e.printStackTrace();
         }
             return con;
