@@ -120,6 +120,10 @@ public class GeoLocationCountryPostCount {
 		return countryPostDataMap;
 	}
 
+	/*Input: sql.Date: startDate and endDate,String: Tag Name
+	 * This Method returns the formatted string for plotting the geo location chart
+	 * Link: https://jsfiddle.net/0q5uzy6n/ 
+	 */
 	public String getJSONCountryPostData(Date startDate,Date endDate,String tagName)
 	{
 		String JSONData="";
@@ -135,6 +139,9 @@ public class GeoLocationCountryPostCount {
 	 * Input: HashMap(String:Country, Integer: Number of Posts)
 	 * This method is used to get the top 10 countries based on the
 	 * number of posts in particular language
+	 * 
+	 * Data: Returned Bar Chart Data
+	 * Link: https://jsfiddle.net/Lrv1d4fq/
 	 */
 	public String getJSONCountryBarChartData(HashMap<String, Integer> hashMap)
 	{
@@ -159,7 +166,7 @@ public class GeoLocationCountryPostCount {
             {
             	break;
             }
-        
+            	
          }
 		barChartData+="\n]";
 		return  barChartData;
