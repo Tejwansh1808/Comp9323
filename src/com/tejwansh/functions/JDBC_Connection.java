@@ -29,10 +29,10 @@ public class JDBC_Connection {
     { 
     
         try{
-        	System.out.println("Starting Connection Attempt");
+        //	System.out.println("Starting Connection Attempt");
             Class.forName("org.postgresql.Driver");
             con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/e_enterprise?user=schi&password=123456");
-            System.out.println("Attempt Successfull!! Connection Established!!!!");
+         //   System.out.println("Attempt Successfull!! Connection Established!!!!");
           
           
             

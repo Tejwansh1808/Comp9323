@@ -31,20 +31,12 @@ public class GeoLocationCountryPostCount {
 
 		con = connect.Connect();
 		try {
-			String sqlString = "Select location as Location from users a join posts b on a.id=b.owneruserid where a.location "
+			String sqlString = "Select location as Location from "+tagName+"  where location "
 					+ "not like '%,%' and "
-					+ "a.location <> '' "
-					+ " and b.tags like '%<"
-					+ tagName
-					+ ">%' and b.creationdate::timestamp::date between '"
+					+ "location <> '' "
+					+"and creationdate::timestamp::date between '"
 					+ startDate + "' and '" + endDate + "'; ";
-			/*String sqlString2 = "select split_part(location,',',2) from users a join posts b on a.id=b.owneruserid where "
-					+ "split_part(a.location,',',2) <> ''"
-					+ " and b.tags like '%<"
-					+ tagName
-					+ ">%' and b.creationdate::timestamp::date between '"
-					+ startDate + "' and '" + endDate + "'; ";
-			*/
+			
 		
 
 			PreparedStatement pd = con.prepareStatement(sqlString);
@@ -121,7 +113,7 @@ public class GeoLocationCountryPostCount {
 	}
 
 	/*Input: sql.Date: startDate and endDate,String: Tag Name
-	 * This Method returns the formatted string for plotting the geo location chart
+	 * This Method returns the formatted string for plotting the geo location chart	
 	 * Link: https://jsfiddle.net/0q5uzy6n/ 
 	 */
 	public String getJSONCountryPostData(Date startDate,Date endDate,String tagName)
@@ -174,16 +166,26 @@ public class GeoLocationCountryPostCount {
 	
 	
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws SQLException {
 		GeoLocationCountryPostCount c = new GeoLocationCountryPostCount();
-		/*
-		 * Test Data
-		Date startDate = Date.valueOf("2015-01-10");
+		Date startDate = Date.valueOf("2008-01-10");
 		Date endDate = Date.valueOf("2016-01-10");
-		System.out.println(c.getJSONCountryPostData(startDate, endDate, "c++"));
-		c.getJSONCountryBarChartData(c.createCountryPostHashMap(startDate, endDate, "java"));
-		c.getJSONCountryPostData(startDate, endDate, "java");
+		/*
+		 * ResultSet r=c.getDataFromTable(startDate, endDate, "java").get(0);
+		 
+		
+		while(r.next())
+		{
+			System.out.println(r.getString(1));
+		}
 		*/
+		//c.getJSONCountryPostData(startDate, endDate, "java");
+		c.getDataFromTable(startDate, endDate, "java");
+		System.out.println("java");
+		
+	//	c.getJSONCountryBarChartData(c.createCountryPostHashMap(startDate, endDate, "java"));
+		//System.out.println(c.getJSONCountryPostData(startDate, endDate, "java"));
+		
 		
 		
 	}
