@@ -238,11 +238,77 @@ public class SummaryChartData {
 	 * Input: ArrayList(String) : tag names (only 4) 
 	 * 
 	 * Output: String: JSONFormatString
-	 * Link:
+	 * Link: https://jsfiddle.net/k86v7dkL/1/
 	 */
-	public void generateJSONViewCountStepChartData(ArrayList<String> tagNames)
+	public String generateJSONViewCountStepChartData(ArrayList<String> tagNames)
 	{
+		int size=0;
+		if(tagNames.size()>4)
+		{
+			size=4;
+		}
+		else
+		{
+			size=tagNames.size();
+		}
+		String dataViewCountJSON="";
+		HashMap<ArrayList<String>, Long> dataViewCountHashMap=new HashMap<ArrayList<String>, Long>();
+		dataViewCountJSON+="[\n['Year'";
+		for(int k=0;k<size;k++)
+		{
+			dataViewCountJSON+=",'"+tagNames.get(k)+"'";
+		}
+		dataViewCountJSON+="]";
 		
+		ResultSet dataResultSet=getSummaryViewCountData(tagNames);
+		try{
+			
+			while(dataResultSet.next())
+			{
+				ArrayList<String> tempKey=new ArrayList<String>();
+				String[] split=dataResultSet.getString(1).split(" ");
+				tempKey.add(split[0]);
+				tempKey.add(split[1]);
+				dataViewCountHashMap.put(tempKey, dataResultSet.getLong(2));
+				
+			}
+			
+			ArrayList<Long> sumByYears=calculateYearSum(dataViewCountHashMap, tagNames);
+			int k=0;
+			for(int i=2008;i<=2016;i++)
+			{	
+				String tempString="";
+				tempString+=",\n['"+i+"'";
+				for(int j=0;j<size;j++)
+				{
+					ArrayList<String> temp=new ArrayList<String>();
+					temp.add(String.valueOf(i));
+					temp.add(tagNames.get(j));
+					float sum=sumByYears.get(k);
+					float value=dataViewCountHashMap.get(temp);
+					
+					//System.out.println(dataViewCountHashMap.get(temp) +"  "+ sumByYears.get(k));
+					float avg=value/sum;
+					tempString+=","+avg*100;
+				}
+				k=k+1;
+				tempString+="]";
+				dataViewCountJSON+=tempString;
+			}
+			
+			dataViewCountJSON+="\n]";
+			
+			
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Error Occured in generateJSONViewCountStepChartData method  in class : SummaryChartData");
+
+			e.printStackTrace();
+		}
+		
+		
+		return dataViewCountJSON;
 	}
 	
 	/*
@@ -253,13 +319,109 @@ public class SummaryChartData {
 	 * Input: ArrayList(String) : tag names (only 4) 
 	 * 
 	 * Output: String: JSONFormatString
-	 * Link:
+	 * Link: https://jsfiddle.net/k86v7dkL/2/
 	 */
-	public void generateJSONCommentCountStepChartData(ArrayList<String> tagNames)
+	public String generateJSONCommentCountStepChartData(ArrayList<String> tagNames)
 	{
+		int size=0;
+		if(tagNames.size()>4)
+		{
+			size=4;
+		}
+		else
+		{
+			size=tagNames.size();
+		}
+		String dataCommentCountJSON="";
+		HashMap<ArrayList<String>, Long> dataCommentCountHashMap=new HashMap<ArrayList<String>, Long>();
+		dataCommentCountJSON+="[\n['Year'";
+		for(int k=0;k<size;k++)
+		{
+			dataCommentCountJSON+=",'"+tagNames.get(k)+"'";
+		}
+		dataCommentCountJSON+="]";
 		
+		ResultSet dataResultSet=getSummaryCommentCountData(tagNames);
+		try{
+			
+			while(dataResultSet.next())
+			{
+				ArrayList<String> tempKey=new ArrayList<String>();
+				String[] split=dataResultSet.getString(1).split(" ");
+				tempKey.add(split[0]);
+				tempKey.add(split[1]);
+				dataCommentCountHashMap.put(tempKey, dataResultSet.getLong(2));
+				
+			}
+			
+			ArrayList<Long> sumByYears=calculateYearSum(dataCommentCountHashMap, tagNames);
+			int k=0;
+			for(int i=2008;i<=2016;i++)
+			{	
+				String tempString="";
+				tempString+=",\n['"+i+"'";
+				for(int j=0;j<size;j++)
+				{
+					ArrayList<String> temp=new ArrayList<String>();
+					temp.add(String.valueOf(i));
+					temp.add(tagNames.get(j));
+					float sum=sumByYears.get(k);
+					float value=dataCommentCountHashMap.get(temp);
+					
+					//System.out.println(dataViewCountHashMap.get(temp) +"  "+ sumByYears.get(k));
+					float avg=value/sum;
+					tempString+=","+avg*100;
+				}
+				k=k+1;
+				tempString+="]";
+				dataCommentCountJSON+=tempString;
+			}
+			
+			dataCommentCountJSON+="\n]";
+			
+			
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Error Occured in generateJSONViewCountStepChartData method  in class : SummaryChartData");
+
+			e.printStackTrace();
+		}
+		
+		
+		return dataCommentCountJSON;
 	}
 	
+	
+	public ArrayList<Long> calculateYearSum(HashMap<ArrayList<String>, Long> map,ArrayList<String> tagNames)
+	{
+		int size=0;
+		if(tagNames.size()>4)
+		{
+			size=4;
+			
+		}
+		else
+		{
+			size=tagNames.size();
+		}
+		long sum=0;
+		ArrayList<Long> sumYear=new ArrayList<Long>();
+		for(int i=2008;i<=2016;i++)
+		{	sum=0;
+			for(int j=0;j<size;j++)
+			{
+				ArrayList<String> temp=new ArrayList<String>();
+				temp.add(String.valueOf(i));
+				temp.add(tagNames.get(j));
+				sum+=map.get(temp);
+			}
+		//	System.out.println(sum);
+			sumYear.add(sum);
+		}
+		
+		return sumYear;
+	}
 	
 	public static void main(String args[])
 	{
@@ -268,7 +430,7 @@ public class SummaryChartData {
 		test.add("java");
 		test.add("c++");
 		test.add("javascript");
-		System.out.println(c.generateJSONPostStepChartData(test));
+		System.out.println(c.generateJSONCommentCountStepChartData(test));
 		
 	}
 
