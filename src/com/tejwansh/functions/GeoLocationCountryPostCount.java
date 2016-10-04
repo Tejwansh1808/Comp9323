@@ -180,8 +180,8 @@ public class GeoLocationCountryPostCount {
 		}
 		*/
 		//c.getJSONCountryPostData(startDate, endDate, "java");
-		c.getDataFromTable(startDate, endDate, "java");
-		System.out.println("java");
+		//c.getDataFromTable(startDate, endDate, "java");
+		System.out.println("java".toUpperCase());
 		
 	//	c.getJSONCountryBarChartData(c.createCountryPostHashMap(startDate, endDate, "java"));
 		//System.out.println(c.getJSONCountryPostData(startDate, endDate, "java"));
