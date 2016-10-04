@@ -127,42 +127,6 @@ public class GeoLocationCountryPostCount {
 	}
 	
 	
-	/*
-	 * Input: HashMap(String:Country, Integer: Number of Posts)
-	 * This method is used to get the top 10 countries based on the
-	 * number of posts in particular language
-	 * 
-	 * Data: Returned Bar Chart Data
-	 * Link: https://jsfiddle.net/Lrv1d4fq/
-	 */
-	public String getJSONCountryBarChartData(HashMap<String, Integer> hashMap)
-	{
-		String barChartData="";
-	    ValueComparator bvc =  new ValueComparator(hashMap);
-        TreeMap<String,Integer> sorted_map = new TreeMap<String,Integer>(bvc);
-        	
-        sorted_map.putAll(hashMap);
-        
-        barChartData+="[\n['Country','Number Of Posts']";
-        Iterator reader = sorted_map.entrySet().iterator();
-        int i=0;
-        while(reader.hasNext()) {
-            if(i<10)
-            {
-           	@SuppressWarnings("rawtypes")
-			Map.Entry entry = (Map.Entry)reader.next();
-            barChartData+=",\n['"+entry.getKey().toString()+"',"+entry.getValue()+"]";
-            i++;
-            }
-            else
-            {
-            	break;
-            }
-            	
-         }
-		barChartData+="\n]";
-		return  barChartData;
-	}
 	
 	
 	
@@ -192,10 +156,10 @@ public class GeoLocationCountryPostCount {
 
 }
 
-class ValueComparator implements Comparator<String> {
+class ValueComparator1 implements Comparator<String> {
 
     Map<String, Integer> base;
-    public ValueComparator(HashMap<String,Integer> base) {
+    public ValueComparator1(HashMap<String,Integer> base) {
         this.base = base;
     }
 
