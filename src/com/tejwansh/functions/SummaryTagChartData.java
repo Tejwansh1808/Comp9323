@@ -71,6 +71,7 @@ public class SummaryTagChartData {
 	 * for Summary Data
 	 * 
 	 * Output: String : JSON Summary String
+	 * Link: https://jsfiddle.net/sbmm9uys/3/
 	 */
 	public String generateJSONSummaryData(String tagName)
 	{

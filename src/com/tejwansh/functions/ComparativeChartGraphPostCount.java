@@ -244,7 +244,7 @@ public class ComparativeChartGraphPostCount {
 	public static void main(String args[])
 	{
 		ComparativeChartGraphPostCount c=new ComparativeChartGraphPostCount();
-		Date startDate = Date.valueOf("2015-01-10");
+		Date startDate = Date.valueOf("2008-01-10");
 		Date endDate = Date.valueOf("2016-01-10");
 		ArrayList<String> r=new ArrayList<String>();
 		r.add("java");
@@ -260,7 +260,7 @@ public class ComparativeChartGraphPostCount {
 		String date = sdf.format(startDate);
 		System.out.println(date); //15/10/2013
 		
-		//System.out.println(c.generateJSONPieChartData(startDate, endDate, r));
+		System.out.println(c.generateJSONPieChartData(startDate, endDate, r));
 	}
 
 }

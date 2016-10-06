@@ -171,7 +171,7 @@ public class CountryPostCountGraph {
 		HashMap<String, Integer> cc=c.createHashMap(startDate, endDate, "java");
 
 		
-		System.out.println(c.getJSONCountryBarChartData(cc));
+		//System.out.println(c.getJSONCountryBarChartData(cc));
 		System.out.println(c.generateJSONStringFormat((cc)));
 		
 		
