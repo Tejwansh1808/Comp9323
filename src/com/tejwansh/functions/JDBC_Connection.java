@@ -3,7 +3,7 @@ package com.tejwansh.functions;
 
 
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.DriverManager;
 
 
@@ -11,7 +11,7 @@ import java.sql.DriverManager;
 
 
 
-import java.sql.PreparedStatement;
+
 
 import java.sql.SQLException;
 
@@ -62,13 +62,6 @@ public class JDBC_Connection {
     		
     	}
     	}
-    public static void main(String args[]) throws SQLException
-    {
-    	JDBC_Connection conn=new JDBC_Connection();
-    	Connection con1=conn.Connect();
-    	PreparedStatement st=con1.prepareStatement("Select * From USERPROFILE");
-    	
-    	
-    }
+ 
   
 }
